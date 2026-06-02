@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Persentr Expert Hub Preview</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f7fb;
+      --panel: #ffffff;
+      --text: #152033;
+      --muted: #667085;
+      --line: #d9e2ef;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --shadow: 0 18px 45px rgba(21, 32, 51, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 28rem),
+        linear-gradient(135deg, #f8fbff 0%, var(--bg) 55%, #eef4fb 100%);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    main {
+      width: min(720px, 100%);
+      padding: 40px;
+      border: 1px solid rgba(217, 226, 239, 0.9);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent-dark);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 7vw, 3.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.22);
+      transition: transform 160ms ease, background 160ms ease;
+    }
+
+    a:hover,
+    a:focus-visible {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    .note {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Persentr Expert Hub</p>
+    <h1>Preview</h1>
+    <p>Стартовая страница GitHub Pages preview для публичного просмотра статуса проекта.</p>
+    <div class="actions">
+      <a href="roadmap_dashboard.html">Открыть Roadmap Dashboard</a>
+    </div>
+    <p class="note">Dashboard использует локальный файл <code>roadmap_status.json</code> из этой же папки.</p>
+  </main>
+</body>
+</html>
