@@ -656,6 +656,13 @@
       "Зафиксировать инженерные стандарты и красные флаги объекта."
     ];
 
+    const statusLabels = {
+      done: "Готово",
+      in_progress: "В работе",
+      blocked: "Блокер",
+      not_started: "Не начато"
+    };
+
     const clampPercent = (value) => Math.max(0, Math.min(100, Number(value) || 0));
 
     const escapeHtml = (value) => String(value)
