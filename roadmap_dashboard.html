@@ -17,6 +17,8 @@
       --in-progress: #2563eb;
       --blocked: #dc2626;
       --not-started: #94a3b8;
+      --warning-bg: #fff7ed;
+      --warning-line: #fed7aa;
       --shadow: 0 18px 45px rgba(21, 32, 51, 0.10);
     }
 
@@ -64,6 +66,9 @@
     }
 
     .summary-card,
+    .view-switcher,
+    .manager-focus,
+    .manager-stage-card,
     .dashboard,
     .details {
       background: rgba(255, 255, 255, 0.92);
@@ -96,6 +101,194 @@
     .updated-at {
       color: var(--muted);
       font-size: 0.94rem;
+    }
+
+    .view-switcher {
+      display: inline-flex;
+      gap: 8px;
+      padding: 8px;
+      margin-bottom: 22px;
+      border-radius: 999px;
+    }
+
+    .view-button {
+      border: 0;
+      border-radius: 999px;
+      padding: 11px 18px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 800;
+      transition: background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .view-button[aria-pressed="true"] {
+      background: #1d4ed8;
+      color: #fff;
+      box-shadow: 0 8px 22px rgba(37, 99, 235, 0.26);
+    }
+
+    .view-panel[hidden] {
+      display: none;
+    }
+
+    .manager-focus {
+      padding: 22px 24px;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ffffff 0%, #eef4ff 100%);
+    }
+
+    .section-eyebrow {
+      margin: 0 0 6px;
+      color: #1d4ed8;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .manager-focus h2,
+    .manager-roadmap h2,
+    .details h2 {
+      margin: 0 0 14px;
+      font-size: 1.25rem;
+    }
+
+    .focus-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: focus;
+    }
+
+    .focus-list li {
+      position: relative;
+      min-height: 100%;
+      padding: 14px 14px 14px 48px;
+      border: 1px solid rgba(37, 99, 235, 0.16);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.78);
+      color: #344054;
+      font-weight: 700;
+    }
+
+    .focus-list li::before {
+      counter-increment: focus;
+      content: counter(focus);
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      display: inline-grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-size: 0.82rem;
+      font-weight: 900;
+    }
+
+    .manager-roadmap {
+      display: grid;
+      gap: 14px;
+    }
+
+    .manager-stage-card {
+      padding: 20px;
+    }
+
+    .manager-card-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 14px;
+    }
+
+    .manager-title {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin: 0;
+      font-size: 1.12rem;
+    }
+
+    .stage-id {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 34px;
+      height: 26px;
+      border-radius: 999px;
+      background: #eef4ff;
+      color: #1d4ed8;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      width: fit-content;
+      border-radius: 999px;
+      padding: 7px 11px;
+      color: #344054;
+      background: #f1f5f9;
+      font-size: 0.86rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .status-pill::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--not-started);
+    }
+
+    .status-pill.done { background: #dcfce7; color: #166534; }
+    .status-pill.in_progress { background: #dbeafe; color: #1d4ed8; }
+    .status-pill.blocked { background: #fee2e2; color: #991b1b; }
+    .status-pill.not_started { background: #f1f5f9; color: #475569; }
+    .status-pill.done::before { background: var(--done); }
+    .status-pill.in_progress::before { background: var(--in-progress); }
+    .status-pill.blocked::before { background: var(--blocked); }
+    .status-pill.not_started::before { background: var(--not-started); }
+
+    .manager-percent {
+      font-size: 2rem;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      text-align: right;
+    }
+
+    .manager-card-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    .manager-note {
+      margin: 0;
+      padding: 14px;
+      border-radius: 16px;
+      background: #f8fafc;
+      color: #344054;
+    }
+
+    .manager-note strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text);
     }
 
     .dashboard {
@@ -162,18 +355,8 @@
       min-width: 0;
     }
 
-    .stage-id {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 34px;
-      height: 26px;
+    .tech-stage-id {
       margin-right: 8px;
-      border-radius: 999px;
-      background: #eef4ff;
-      color: #1d4ed8;
-      font-size: 0.78rem;
-      font-weight: 800;
     }
 
     .stage-title {
@@ -219,41 +402,54 @@
       padding: 22px 20px;
     }
 
-    .details h2 {
-      margin: 0 0 14px;
-      font-size: 1.25rem;
-    }
-
-    .detail-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 14px;
-    }
-
-    .detail-card {
-      padding: 16px;
+    .detail-table-wrap {
+      overflow-x: auto;
       border: 1px solid rgba(217, 226, 239, 0.86);
       border-radius: 18px;
       background: #fbfdff;
     }
 
-    .detail-card h3 {
-      margin: 0 0 8px;
-      font-size: 1rem;
+    .detail-table {
+      width: 100%;
+      min-width: 860px;
+      border-collapse: collapse;
+      font-size: 0.92rem;
     }
 
-    .detail-card p {
-      margin: 8px 0 0;
-      color: var(--muted);
-      font-size: 0.94rem;
+    .detail-table th,
+    .detail-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(217, 226, 239, 0.86);
+      text-align: left;
+      vertical-align: top;
     }
 
-    .detail-card strong {
-      color: var(--text);
+    .detail-table th {
+      color: #344054;
+      background: #f8fafc;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .detail-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .nowrap {
+      white-space: nowrap;
+    }
+
+    @media (max-width: 920px) {
+      .focus-list,
+      .manager-card-body {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 820px) {
-      .hero {
+      .hero,
+      .manager-card-top {
         grid-template-columns: 1fr;
       }
 
@@ -261,11 +457,19 @@
         min-width: 0;
       }
 
+      .view-switcher {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        border-radius: 22px;
+      }
+
       .stage {
         grid-template-columns: 1fr;
         gap: 10px;
       }
 
+      .manager-percent,
       .percent {
         text-align: left;
       }
@@ -277,119 +481,180 @@
     <section class="hero" aria-labelledby="page-title">
       <div>
         <h1 id="page-title">Roadmap Status</h1>
-        <p class="subtitle">Живая горизонтальная гистограмма прогресса дорожной карты Persentr Expert Hub. Данные берутся из <code>roadmap_status.json</code>, а при локальном открытии через <code>file://</code> используется встроенный fallback.</p>
+        <p class="subtitle">Два уровня дорожной карты Persentr Expert Hub: управленческий обзор по умолчанию и техническая детализация для инженерной проверки.</p>
       </div>
       <aside class="summary-card" aria-label="Сводка прогресса">
-        <div class="summary-label">Средний прогресс</div>
+        <div class="summary-label">Общий прогресс</div>
         <div class="summary-value" id="averageProgress">—</div>
         <div class="updated-at" id="updatedAt">Обновление: —</div>
       </aside>
     </section>
 
-    <section class="dashboard" aria-label="Гистограмма прогресса">
-      <div class="toolbar">
-        <ul class="legend" aria-label="Легенда статусов">
-          <li><span class="dot done"></span>done</li>
-          <li><span class="dot in_progress"></span>in_progress</li>
-          <li><span class="dot blocked"></span>blocked</li>
-          <li><span class="dot not_started"></span>not_started</li>
-        </ul>
-        <div class="source-mode" id="sourceMode">Источник: загрузка…</div>
-      </div>
-      <div class="chart" id="chart" role="list"></div>
+    <nav class="view-switcher" aria-label="Переключатель уровня просмотра">
+      <button class="view-button" type="button" data-view="manager" aria-controls="managerView" aria-pressed="true">Для менеджера</button>
+      <button class="view-button" type="button" data-view="technical" aria-controls="technicalView" aria-pressed="false">Для технаря</button>
+    </nav>
+
+    <section class="view-panel" id="managerView" aria-label="Управленческий уровень">
+      <section class="manager-focus" aria-labelledby="focus-title">
+        <p class="section-eyebrow">Ближайший фокус</p>
+        <h2 id="focus-title">3 главных действия</h2>
+        <ol class="focus-list" id="focusList"></ol>
+      </section>
+
+      <section class="manager-roadmap" id="managerRoadmap" aria-label="Этапы дорожной карты"></section>
     </section>
 
-    <section class="details" aria-labelledby="details-title">
-      <h2 id="details-title">Доказательства и следующие действия</h2>
-      <div class="detail-grid" id="detailsGrid"></div>
+    <section class="view-panel" id="technicalView" aria-label="Технический уровень" hidden>
+      <section class="dashboard" aria-label="Гистограмма прогресса">
+        <div class="toolbar">
+          <ul class="legend" aria-label="Легенда статусов">
+            <li><span class="dot done"></span>done</li>
+            <li><span class="dot in_progress"></span>in_progress</li>
+            <li><span class="dot blocked"></span>blocked</li>
+            <li><span class="dot not_started"></span>not_started</li>
+          </ul>
+          <div class="source-mode" id="sourceMode">Источник: загрузка…</div>
+        </div>
+        <div class="chart" id="chart" role="list"></div>
+      </section>
+
+      <section class="details" aria-labelledby="details-title">
+        <h2 id="details-title">Техническая детализация</h2>
+        <div class="detail-table-wrap">
+          <table class="detail-table">
+            <thead>
+              <tr>
+                <th>Этап</th>
+                <th>Status</th>
+                <th>Progress percent</th>
+                <th>Evidence</th>
+                <th>Next action</th>
+              </tr>
+            </thead>
+            <tbody id="detailsTable"></tbody>
+          </table>
+        </div>
+      </section>
     </section>
   </main>
 
   <script>
     const fallbackData = {
-      updated_at: "2026-06-02",
-      stages: [
-        {
-          id: "0",
-          title: "Каркас проекта",
-          progress_percent: 100,
-          status: "done",
-          evidence: "Структура проекта, шаблоны и базовые инструкции заведены в репозитории.",
-          next_action: "Поддерживать структуру при добавлении новых материалов и инструментов."
-        },
-        {
-          id: "1",
-          title: "Обработка входных материалов",
-          progress_percent: 100,
-          status: "done",
-          evidence: "Оформлены базовые правила приёма, описания папок и безопасной обработки входных материалов.",
-          next_action: "Поддерживать порядок обработки при каждом новом пакете входных материалов."
-        },
-        {
-          id: "2",
-          title: "База экспертных тем",
-          progress_percent: 100,
-          status: "done",
-          evidence: "Сформирована база экспертных тем по 6 направлениям первой итерации.",
-          next_action: "Провести редакционную проверку приоритетов и выбрать первую партию для публичного слоя."
-        },
-        {
-          id: "2.5",
-          title: "Публичный контур заявок",
-          progress_percent: 85,
-          status: "in_progress",
-          evidence: "Оформлен документационный контур процесса заявок: scope, workflow, статусы и шаблоны ответов.",
-          next_action: "Связать intake с таблицей заявок или CRM-процессом и определить ответственных за ручную обработку."
-        },
-        {
-          id: "3",
-          title: "Публичный слой v1",
-          progress_percent: 10,
-          status: "in_progress",
-          evidence: "Есть первый материал базы знаний, но пакет из FAQ, чек-листов, видео-тем и лид-магнита ещё не собран.",
-          next_action: "Выбрать приоритетные темы и подготовить первую серию публичных материалов без персональных ссылок и авторских упоминаний."
-        },
-        {
-          id: "4",
-          title: "Партнёрский слой v1",
-          progress_percent: 12,
-          status: "in_progress",
-          evidence: "Есть базовое правило для партнёров и документация процесса заявок, но полный пакет чек-листов, ошибок и теста допуска не готов.",
-          next_action: "Собрать чек-лист объекта, чек-лист фото щита, чек-лист АКБ/BMS и тест внутренней проверки."
-        },
-        {
-          id: "5",
-          title: "Продажный слой v1",
-          progress_percent: 5,
-          status: "in_progress",
-          evidence: "Есть первый ответ на возражение, но набор коротких ответов, КП-блоков и сравнительных таблиц ещё не сформирован.",
-          next_action: "Подготовить 20 коротких ответов для мессенджеров и первые КП-блоки без обещаний “весь дом” без ограничений."
-        },
-        {
-          id: "6",
-          title: "Инженерные стандарты v1",
-          progress_percent: 20,
-          status: "in_progress",
-          evidence: "Заведён минимальный LFP-стандарт, остальные стандарты и красные флаги требуют оформления.",
-          next_action: "Сформировать стандарты BMS, инверторов, DC-безопасности и список красных флагов объекта."
-        },
-        {
-          id: "7",
-          title: "Инструменты",
-          progress_percent: 35,
-          status: "in_progress",
-          evidence: "Есть инструменты обработки HTML-экспортов и новая панель статуса дорожной карты.",
-          next_action: "Добавить обезличиватель, классификатор тем и экспорт в структуру сайта."
-        }
+      "updated_at": "2026-06-02",
+      "stages": [
+            {
+                  "id": "0",
+                  "title": "Каркас проекта",
+                  "progress_percent": 100,
+                  "status": "done",
+                  "evidence": "Структура проекта, шаблоны и базовые инструкции заведены в репозитории.",
+                  "next_action": "Поддерживать структуру при добавлении новых материалов и инструментов.",
+                  "manager_summary": "Каркас уже задан: команда может добавлять материалы без пересборки процесса.",
+                  "management_action": "Сохранять структуру и не расширять проект за пределы первой итерации.",
+                  "manager_title": "Каркас проекта"
+            },
+            {
+                  "id": "1",
+                  "title": "Обработка входных материалов",
+                  "progress_percent": 100,
+                  "status": "done",
+                  "evidence": "Оформлены базовые правила приёма, описания папок и безопасной обработки входных материалов.",
+                  "next_action": "Поддерживать порядок обработки при каждом новом пакете входных материалов.",
+                  "manager_summary": "Входные материалы можно принимать и обрабатывать по единому безопасному правилу.",
+                  "management_action": "Поддерживать регулярное обновление порядка обработки новых материалов.",
+                  "manager_title": "Обработка входных материалов"
+            },
+            {
+                  "id": "2",
+                  "title": "База экспертных тем",
+                  "progress_percent": 100,
+                  "status": "done",
+                  "evidence": "Сформирована база экспертных тем по 6 направлениям первой итерации.",
+                  "next_action": "Провести редакционную проверку приоритетов и выбрать первую партию для публичного слоя.",
+                  "manager_summary": "База экспертных тем собрана и готова к редакционному отбору.",
+                  "management_action": "Выбрать приоритетные темы для первой публичной и партнёрской волны.",
+                  "manager_title": "База экспертных тем"
+            },
+            {
+                  "id": "2.5",
+                  "title": "Публичный контур заявок",
+                  "progress_percent": 85,
+                  "status": "in_progress",
+                  "evidence": "Оформлен документационный контур процесса заявок: scope, workflow, статусы и шаблоны ответов.",
+                  "next_action": "Связать intake с таблицей заявок или CRM-процессом и определить ответственных за ручную обработку.",
+                  "manager_summary": "Контур заявок почти готов, но ещё требует привязки к операционному процессу.",
+                  "management_action": "Определить ответственных и связать intake с таблицей заявок или CRM-процессом.",
+                  "manager_title": "Публичный контур заявок"
+            },
+            {
+                  "id": "3",
+                  "title": "Публичный слой v1",
+                  "progress_percent": 10,
+                  "status": "in_progress",
+                  "evidence": "Есть первый материал базы знаний, но пакет из FAQ, чек-листов, видео-тем и лид-магнита ещё не собран.",
+                  "next_action": "Выбрать приоритетные темы и подготовить первую серию публичных материалов без персональных ссылок и авторских упоминаний.",
+                  "manager_summary": "Публичный слой только стартовал: нужна управляемая первая серия материалов.",
+                  "management_action": "Утвердить первую партию публичных тем и проверить обезличивание перед публикацией.",
+                  "manager_title": "Публичный слой v1"
+            },
+            {
+                  "id": "4",
+                  "title": "Партнёрский слой v1",
+                  "progress_percent": 12,
+                  "status": "in_progress",
+                  "evidence": "Есть базовое правило для партнёров и документация процесса заявок, но полный пакет чек-листов, ошибок и теста допуска не готов.",
+                  "next_action": "Собрать чек-лист объекта, чек-лист фото щита, чек-лист АКБ/BMS и тест внутренней проверки.",
+                  "manager_summary": "Партнёрский слой пока фрагментарный: нет полного пакета чек-листов и проверки допуска.",
+                  "management_action": "Собрать базовые чек-листы объекта, фото щита, АКБ/BMS и тест внутренней проверки.",
+                  "manager_title": "Партнёрский слой v1"
+            },
+            {
+                  "id": "5",
+                  "title": "Продажный слой v1",
+                  "progress_percent": 5,
+                  "status": "in_progress",
+                  "evidence": "Есть первый ответ на возражение, но набор коротких ответов, КП-блоков и сравнительных таблиц ещё не сформирован.",
+                  "next_action": "Подготовить 20 коротких ответов для мессенджеров и первые КП-блоки без обещаний “весь дом” без ограничений.",
+                  "manager_summary": "Продажные материалы находятся в начале: менеджерам не хватает коротких готовых ответов.",
+                  "management_action": "Подготовить 20 безопасных ответов для мессенджеров и первые блоки КП.",
+                  "manager_title": "Продажный слой v1"
+            },
+            {
+                  "id": "6",
+                  "title": "Инженерные стандарты v1",
+                  "progress_percent": 20,
+                  "status": "in_progress",
+                  "evidence": "Заведён минимальный LFP-стандарт, остальные стандарты и красные флаги требуют оформления.",
+                  "next_action": "Сформировать стандарты BMS, инверторов, DC-безопасности и список красных флагов объекта.",
+                  "manager_summary": "Инженерные стандарты начаты, но ключевые правила ещё нужно оформить.",
+                  "management_action": "Зафиксировать стандарты BMS, инверторов, DC-безопасности и красные флаги объекта.",
+                  "manager_title": "Инженерные стандарты v1"
+            },
+            {
+                  "id": "7",
+                  "title": "Инструменты",
+                  "progress_percent": 35,
+                  "status": "in_progress",
+                  "evidence": "Есть инструменты обработки HTML-экспортов и новая панель статуса дорожной карты.",
+                  "next_action": "Добавить обезличиватель, классификатор тем и экспорт в структуру сайта.",
+                  "manager_summary": "Инструменты помогают видеть статус, но автоматизация обработки ещё неполная.",
+                  "management_action": "Добавить обезличиватель, классификатор тем и экспорт в структуру сайта.",
+                  "manager_title": "Инструменты"
+            }
+      ],
+      "manager_focus": [
+            "Утвердить первую партию публичных тем без персональных ссылок и авторских упоминаний.",
+            "Собрать партнёрские чек-листы объекта, фото щита, АКБ/BMS и тест внутренней проверки.",
+            "Оформить инженерные стандарты BMS, инверторов, DC-безопасности и красные флаги объекта."
       ]
-    };
+};
 
-    const statusLabels = {
-      done: "Готово",
-      in_progress: "В работе",
-      blocked: "Заблокировано",
-      not_started: "Не начато"
-    };
+    const fallbackFocus = [
+      "Утвердить первую партию публичных материалов без персональных ссылок и авторских упоминаний.",
+      "Собрать партнёрские чек-листы и тест внутренней проверки.",
+      "Зафиксировать инженерные стандарты и красные флаги объекта."
+    ];
 
     const clampPercent = (value) => Math.max(0, Math.min(100, Number(value) || 0));
 
@@ -412,18 +677,55 @@
       }
     }
 
-    function render(data, source) {
-      const stages = Array.isArray(data.stages) ? data.stages : [];
+    function renderSummary(data, stages) {
       const average = stages.length
         ? Math.round(stages.reduce((sum, stage) => sum + clampPercent(stage.progress_percent), 0) / stages.length)
         : 0;
 
       document.getElementById("averageProgress").textContent = `${average}%`;
       document.getElementById("updatedAt").textContent = `Обновление: ${data.updated_at || "не указано"}`;
+    }
+
+    function renderManagerView(data, stages) {
+      const focusItems = Array.isArray(data.manager_focus) && data.manager_focus.length
+        ? data.manager_focus.slice(0, 3)
+        : fallbackFocus;
+      const focusList = document.getElementById("focusList");
+      const managerRoadmap = document.getElementById("managerRoadmap");
+
+      focusList.innerHTML = focusItems.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+      managerRoadmap.innerHTML = stages.map((stage) => {
+        const percent = clampPercent(stage.progress_percent);
+        const status = stage.status || "not_started";
+        const title = escapeHtml(stage.manager_title || stage.title || "Без названия");
+        const id = escapeHtml(stage.id || "—");
+        const label = statusLabels[status] || status;
+        const summary = stage.manager_summary || "Этап требует управленческой оценки перед следующим шагом.";
+        const action = stage.management_action || stage.next_action || "Назначить ответственное управленческое действие.";
+
+        return `
+          <article class="manager-stage-card">
+            <div class="manager-card-top">
+              <div>
+                <h2 class="manager-title"><span class="stage-id">${id}</span>${title}</h2>
+                <span class="status-pill ${escapeHtml(status)}">${escapeHtml(label)}</span>
+              </div>
+              <div class="manager-percent">${percent}%</div>
+            </div>
+            <div class="manager-card-body">
+              <p class="manager-note"><strong>Что это значит</strong>${escapeHtml(summary)}</p>
+              <p class="manager-note"><strong>Ближайшее управленческое действие</strong>${escapeHtml(action)}</p>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function renderTechnicalView(stages, source) {
       document.getElementById("sourceMode").textContent = `Источник: ${source}`;
 
       const chart = document.getElementById("chart");
-      const detailsGrid = document.getElementById("detailsGrid");
+      const detailsTable = document.getElementById("detailsTable");
 
       chart.innerHTML = stages.map((stage) => {
         const percent = clampPercent(stage.progress_percent);
@@ -435,7 +737,7 @@
         return `
           <article class="stage" role="listitem" aria-label="${title}: ${percent}%">
             <div class="stage-heading">
-              <span class="stage-id">${id}</span>
+              <span class="stage-id tech-stage-id">${id}</span>
               <span class="stage-title">${title}</span>
               <div class="stage-status">${escapeHtml(label)} · ${escapeHtml(status)}</div>
             </div>
@@ -447,15 +749,46 @@
         `;
       }).join("");
 
-      detailsGrid.innerHTML = stages.map((stage) => `
-        <article class="detail-card">
-          <h3>${escapeHtml(stage.id || "—")}. ${escapeHtml(stage.title || "Без названия")}</h3>
-          <p><strong>Evidence:</strong> ${escapeHtml(stage.evidence || "Не указано.")}</p>
-          <p><strong>Next action:</strong> ${escapeHtml(stage.next_action || "Не указано.")}</p>
-        </article>
-      `).join("");
+      detailsTable.innerHTML = stages.map((stage) => {
+        const status = stage.status || "not_started";
+        const percent = clampPercent(stage.progress_percent);
+        return `
+          <tr>
+            <td><strong>${escapeHtml(stage.id || "—")}.</strong> ${escapeHtml(stage.title || "Без названия")}</td>
+            <td class="nowrap"><span class="status-pill ${escapeHtml(status)}">${escapeHtml(status)}</span></td>
+            <td class="nowrap">${percent}%</td>
+            <td>${escapeHtml(stage.evidence || "Не указано.")}</td>
+            <td>${escapeHtml(stage.next_action || "Не указано.")}</td>
+          </tr>
+        `;
+      }).join("");
     }
 
+    function activateView(viewName) {
+      const isManager = viewName === "manager";
+      document.getElementById("managerView").hidden = !isManager;
+      document.getElementById("technicalView").hidden = isManager;
+
+      document.querySelectorAll(".view-button").forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.view === viewName));
+      });
+    }
+
+    function bindViewSwitcher() {
+      document.querySelectorAll(".view-button").forEach((button) => {
+        button.addEventListener("click", () => activateView(button.dataset.view));
+      });
+    }
+
+    function render(data, source) {
+      const stages = Array.isArray(data.stages) ? data.stages : [];
+      renderSummary(data, stages);
+      renderManagerView(data, stages);
+      renderTechnicalView(stages, source);
+    }
+
+    bindViewSwitcher();
+    activateView("manager");
     loadRoadmapStatus().then(({ data, source }) => render(data, source));
   </script>
 </body>
